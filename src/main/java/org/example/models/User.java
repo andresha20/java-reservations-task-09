@@ -1,11 +1,15 @@
 package org.example.models;
 
+import org.example.validations.UserValidation;
+
 public class User {
     private Integer id;
     private String document;
     private String names;
     private String email;
     private Integer location;
+
+    private final UserValidation userValidation = new UserValidation();
 
     public User() {
     }
@@ -50,7 +54,12 @@ public class User {
     }
 
     public void setNames(String names) {
-        this.names = names;
+        try {
+            this.userValidation.validateName(names);
+            this.names = names;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getEmail() {
