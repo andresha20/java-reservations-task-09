@@ -1,20 +1,24 @@
 package org.example.models;
 
-import java.text.DateFormat;
+import org.example.validations.OfferValidation;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Offer {
 
     private Integer id;
     private String title;
     private String description;
-    private DateFormat startDate;
-    private DateFormat endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Double personCost;
     private Integer idLocal;
 
+    private OfferValidation offerValidation = new OfferValidation();
     public Offer() {
     }
-    public Offer(Integer id, String title, String description, DateFormat startDate, DateFormat endDate, Double personCost, Integer idLocal) {
+    public Offer(Integer id, String title, String description, LocalDate startDate, LocalDate endDate, Double personCost, Integer idLocal) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -50,7 +54,12 @@ public class Offer {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        try {
+            offerValidation.validateTitle(title);
+            this.title = title;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getDescription() {
@@ -61,20 +70,31 @@ public class Offer {
         this.description = description;
     }
 
-    public DateFormat getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(DateFormat startDate) {
-        this.startDate = startDate;
+    public void setStartDate(String startDate, String endDate) {
+        try {
+            offerValidation.validateDateFormat(startDate);
+            offerValidation.validateStartDate(startDate, endDate);
+            this.startDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public DateFormat getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(DateFormat endDate) {
-        this.endDate = endDate;
+    public void setEndDate(String endDate) {
+        try {
+            offerValidation.validateDateFormat(endDate);
+            this.endDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Double getPersonCost() {
@@ -82,7 +102,12 @@ public class Offer {
     }
 
     public void setPersonCost(Double personCost) {
-        this.personCost = personCost;
+        try {
+            offerValidation.validateCost(personCost);
+            this.personCost = personCost;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Integer getIdLocal() {

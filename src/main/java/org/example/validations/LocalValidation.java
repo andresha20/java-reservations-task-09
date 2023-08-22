@@ -1,12 +1,22 @@
 package org.example.validations;
 
-public class LocalValidation {
+import org.example.utils.Message;
+import org.example.utils.Util;
 
-    public boolean validateNIT(String NIT) {
+public class LocalValidation {
+    public boolean validateNIT(String NIT) throws Exception {
+        Boolean matches = Util.searchRegexCoincidence(NIT, "^\\d{10}$");
+        if (!matches) {
+            throw new Exception(Message.NIT_VALUE.getMessage());
+        }
         return true;
     }
 
-    public boolean validateLocalName(String localName) {
+    public boolean validateLocalName(String localName) throws Exception {
+        Boolean matches = Util.searchRegexCoincidence(localName, "^.{5,30}$");
+        if (!matches) {
+            throw new Exception(Message.NAME_FORMAT.getMessage());
+        }
         return true;
     }
 }

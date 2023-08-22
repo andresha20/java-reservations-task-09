@@ -1,5 +1,7 @@
 package org.example.models;
 
+import org.example.validations.LocalValidation;
+
 public class Local {
 
     private Integer id;
@@ -8,6 +10,7 @@ public class Local {
     private Integer location;
     private String description;
 
+    private LocalValidation localValidation = new LocalValidation();
     public Local() {
     }
     public Local(Integer id, String name, String nit, Integer location, String description) {
@@ -42,7 +45,12 @@ public class Local {
     }
 
     public void setName(String name) {
-        this.name = name;
+        try {
+            localValidation.validateLocalName(name);
+            this.name = name;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getNit() {
@@ -50,7 +58,12 @@ public class Local {
     }
 
     public void setNit(String nit) {
-        this.nit = nit;
+        try {
+            localValidation.validateNIT(nit);
+            this.nit = nit;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Integer getLocation() {

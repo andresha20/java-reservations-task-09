@@ -67,7 +67,12 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        try {
+            userValidation.validateEmail(email);
+            this.email = email;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Integer getLocation() {
@@ -75,6 +80,11 @@ public class User {
     }
 
     public void setLocation(Integer location) {
-        this.location = location;
+        try {
+            userValidation.validateLocation(location);
+            this.location = location;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

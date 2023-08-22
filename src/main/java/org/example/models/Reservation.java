@@ -1,6 +1,7 @@
 package org.example.models;
 
-import java.text.DateFormat;
+import org.example.validations.OfferValidation;
+import org.example.validations.ReservationValidation;
 
 public class Reservation {
 
@@ -8,7 +9,9 @@ public class Reservation {
     private Integer idUser;
     private Double totalCost;
     private Integer totalUsers;
-    private DateFormat reservationDate;
+    private String reservationDate;
+    private OfferValidation offerValidation = new OfferValidation();
+    private ReservationValidation reservationValidation = new ReservationValidation();
 
     @Override
     public String toString() {
@@ -23,7 +26,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Integer id, Integer idUser, Double totalCost, DateFormat reservationDate, Integer totalUsers) {
+    public Reservation(Integer id, Integer idUser, Double totalCost, String reservationDate, Integer totalUsers) {
         this.id = id;
         this.idUser = idUser;
         this.totalCost = totalCost;
@@ -55,12 +58,17 @@ public class Reservation {
         this.totalCost = totalCost;
     }
 
-    public DateFormat getReservationDate() {
+    public String getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(DateFormat reservationDate) {
-        this.reservationDate = reservationDate;
+    public void setReservationDate(String reservationDate) {
+        try {
+            offerValidation.validateDateFormat(reservationDate);
+            this.reservationDate = reservationDate;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Integer getTotalUsers() {
@@ -68,6 +76,10 @@ public class Reservation {
     }
 
     public void setTotalUsers(Integer totalUsers) {
-        this.totalUsers = totalUsers;
-    }
+        try {
+            reservationValidation.validateReservationUsers(totalUsers);
+            this.totalUsers = totalUsers;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }    }
 }
