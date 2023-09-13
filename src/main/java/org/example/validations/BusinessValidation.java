@@ -3,7 +3,7 @@ package org.example.validations;
 import org.example.utils.Message;
 import org.example.utils.Util;
 
-public class LocalValidation {
+public class BusinessValidation {
     public boolean validateNIT(String NIT) throws Exception {
         Boolean matches = Util.searchRegexCoincidence(NIT, "^\\d{10}$");
         if (!matches) {

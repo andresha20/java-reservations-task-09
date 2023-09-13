@@ -1,8 +1,8 @@
 package org.example.models;
 
-import org.example.validations.LocalValidation;
+import org.example.validations.BusinessValidation;
 
-public class Local {
+public abstract class Business {
 
     private Integer id;
     private String name;
@@ -10,10 +10,10 @@ public class Local {
     private Integer location;
     private String description;
 
-    private LocalValidation localValidation = new LocalValidation();
-    public Local() {
+    private BusinessValidation businessValidation = new BusinessValidation();
+    public Business() {
     }
-    public Local(Integer id, String name, String nit, Integer location, String description) {
+    public Business(Integer id, String name, String nit, Integer location, String description) {
         this.id = id;
         this.name = name;
         this.nit = nit;
@@ -46,7 +46,7 @@ public class Local {
 
     public void setName(String name) {
         try {
-            localValidation.validateLocalName(name);
+            businessValidation.validateLocalName(name);
             this.name = name;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -59,7 +59,7 @@ public class Local {
 
     public void setNit(String nit) {
         try {
-            localValidation.validateNIT(nit);
+            businessValidation.validateNIT(nit);
             this.nit = nit;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -81,4 +81,6 @@ public class Local {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public abstract Double charge();
 }

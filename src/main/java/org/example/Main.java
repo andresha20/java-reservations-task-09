@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.models.Local;
+import org.example.models.Business;
 import org.example.models.Offer;
 import org.example.models.Reservation;
 import org.example.models.User;
@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         User userModel = new User();
         Offer offerModel = new Offer();
-        Local localModel = new Local();
+        // Business businessModel = new Business();
         Reservation reservationModel = new Reservation();
         Boolean isInvalid = false;
         Scanner scanner = new Scanner(System.in);
@@ -35,8 +35,8 @@ public class Main {
             offerModel.setPersonCost(10.5);
             System.out.println("Local validations");
             System.out.println("================");
-            localModel.setNit("1001237619");
-            localModel.setName("This is my business name");
+            // businessModel.setNit("1001237619");
+            // businessModel.setName("This is my business name");
             System.out.println("Reservation validations");
             System.out.println("================");
             reservationModel.setReservationDate("03-09-2000");
@@ -59,8 +59,8 @@ public class Main {
             System.out.println("================");
             System.out.println("Local validations");
             System.out.println("================");
-            localModel.setNit("10012gcs619");
-            localModel.setName("This is my business name that is longer than 30 characters and it doesn't fit my required validation");
+            // businessModel.setNit("10012gcs619");
+            // businessModel.setName("This is my business name that is longer than 30 characters and it doesn't fit my required validation");
             System.out.println("================");
             System.out.println("Reservation validations");
             System.out.println("================");

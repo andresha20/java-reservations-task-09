@@ -9,10 +9,10 @@ public class UserValidation {
     public boolean validateName(String name) throws Exception {
         Boolean matches = Util.searchRegexCoincidence(name, "^(?![\\d ]{10,})[^\\d]{10,}$");
         if (!matches) {
+            if (name.length() < 10) {
+                throw new Exception(Message.NAME_LENGTH.getMessage());
+            }
             throw new Exception(Message.NAME_FORMAT.getMessage());
-        }
-        if (name.length() < 10) {
-            throw new Exception(Message.NAME_LENGTH.getMessage());
         }
         return true;
     }
